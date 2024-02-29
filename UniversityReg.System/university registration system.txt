@@ -1,0 +1,321 @@
+
+mysql> create database Univ_reg_sys;
+Query OK, 1 row affected (0.06 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| assignments        |
+| firtsbit           |
+| hotelmanagement    |
+| information_schema |
+| mysql              |
+| performance_schema |
+| project            |
+| student            |
+| sys                |
+| univ_reg_sys       |
++--------------------+
+
+//----------------------------------------------------------create for student-----------------------------------------------------------------
+
+mysql> create table student_info(rollno int primary key,
+    name  varchar(50) not null,
+    phone bigint unique,
+    email varchar(30) check(email like '%@%'),
+    address varchar(30),
+    academic_program varchar(20));
+Query OK, 0 rows affected (0.23 sec)
+
+
+//-----------------------------------------------------------------------------------------------------------------------------------------
+
+mysql> desc student_info;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| rollno           | int         | NO   | PRI | NULL    |       |
+| name             | varchar(50) | NO   |     | NULL    |       |
+| phone            | bigint      | YES  | UNI | NULL    |       |
+| email            | varchar(30) | YES  |     | NULL    |       |
+| address          | varchar(30) | YES  |     | NULL    |       |
+| academic_program | varchar(20) | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+
+//---------------------------------------------------------------insert for  student-----------------------------------------------------
+
+
+
+INSERT INTO student_info (rollno, name, phone, email, address, academic_program) VALUES
+(1, 'Aarav Sharma', 9876543210, 'aaravsharma@gmail.com', '123 Main St, Delhi', 'Computer Science'),
+(2, 'Ananya Patel', 8765432109, 'ananyapatel@gmail.com', '456 Oak Ave, Mumbai', 'Mathematics'),
+(3, 'Aisha Singh', 7654321098, 'aishasingh@gmail.com', '789 Elm Blvd, Bangalore', 'Physics'),
+(4, 'Arjun Gupta', 6543210987, 'arjungupta@gmail.com', '321 Pine Rd, Kolkata', 'Chemistry'),
+(5, 'Ishaan Verma', 5432109876, 'ishaanverma@gmail.com', '654 Cedar Ln, Chennai', 'Engineering'),
+(6, 'Aditi Chauhan', 4321098765, 'aditichauhan@gmail.com', '876 Birch St, Hyderabad', 'Biology'),
+(7, 'Kavya Reddy', 3210987654, 'kavyareddy@gmail.com', '987 Willow Ave, Pune', 'English'),
+(8, 'Rahul Kumar', 2109876543, 'rahulkumar@gmail.com', '234 Oak St, Ahmedabad', 'History'),
+(9, 'Sneha Mishra', 1098765432, 'snehamishra@gmail.com', '567 Maple Dr, Jaipur', 'Psychology'),
+(10, 'Vikram Singh', 8765432100, 'vikramsingh@gmail.com', '876 Pine Ave, Lucknow', 'Sociology');
+
+Query OK, 10 rows affected (0.02 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select* from student_info;
++--------+---------------+------------+------------------------+-------------------------+------------------+
+| rollno | name          | phone      | email                  | address                 | academic_program |
++--------+---------------+------------+------------------------+-------------------------+------------------+
+|      1 | Aarav Sharma  | 9876543210 | aaravsharma@gmail.com  | 123 Main St, Delhi      | Computer Science |
+|      2 | Ananya Patel  | 8765432109 | ananyapatel@gmail.com  | 456 Oak Ave, Mumbai     | Mathematics      |
+|      3 | Aisha Singh   | 7654321098 | aishasingh@gmail.com   | 789 Elm Blvd, Bangalore | Physics          |
+|      4 | Arjun Gupta   | 6543210987 | arjungupta@gmail.com   | 321 Pine Rd, Kolkata    | Chemistry        |
+|      5 | Ishaan Verma  | 5432109876 | ishaanverma@gmail.com  | 654 Cedar Ln, Chennai   | Engineering      |
+|      6 | Aditi Chauhan | 4321098765 | aditichauhan@gmail.com | 876 Birch St, Hyderabad | Biology          |
+|      7 | Kavya Reddy   | 3210987654 | kavyareddy@gmail.com   | 987 Willow Ave, Pune    | English          |
+|      8 | Rahul Kumar   | 2109876543 | rahulkumar@gmail.com   | 234 Oak St, Ahmedabad   | History          |
+|      9 | Sneha Mishra  | 1098765432 | snehamishra@gmail.com  | 567 Maple Dr, Jaipur    | Psychology       |
+|     10 | Vikram Singh  | 8765432100 | vikramsingh@gmail.com  | 876 Pine Ave, Lucknow   | Sociology        |
++--------+---------------+------------+------------------------+-------------------------+------------------+
+10 rows in set (0.00 sec)
+
+//-----------------------------------------------------------------create for course info-----------------------------------------------------------
+
+
+-- Create the course_info table
+CREATE TABLE course_info (
+    coursecode INT PRIMARY KEY,
+    coursename VARCHAR(30) NOT NULL,
+    hours INT,
+    instructor_id VARCHAR(20)
+);
+
+//-------------------------------------------------------------create for course info---------------------------------------------------------------
+
+
+
+-- Insert sample entries
+INSERT INTO course_info (coursecode, coursename, hours, instructor_id) VALUES
+(101, 'Intro to CS', 3, 'INST001'),
+(102, 'Advanced Mathematics', 4, 'INST002'),
+(103, 'Physics for Engineers', 3, 'INST003'),
+(104, 'Organic Chemistry', 4, 'INST004'),
+(105, 'Software Engineering', 3, 'INST001'),
+(106, 'Cell Biology', 4, 'INST005'),
+(107, 'English Literature', 3, 'INST006'),
+(108, 'World History', 4, 'INST007'),
+(109, 'Psychological Principles', 3, 'INST008'),
+(110, 'Social Issues in Society', 4, 'INST009');
+
+
+mysql> select* from course_info;
++------------+--------------------------+-------+---------------+
+| coursecode | coursename               | hours | instructor_id |
++------------+--------------------------+-------+---------------+
+|        101 | Intro to CS              |     3 | INST001       |
+|        102 | Advanced Mathematics     |     4 | INST002       |
+|        103 | Physics for Engineers    |     3 | INST003       |
+|        104 | Organic Chemistry        |     4 | INST004       |
+|        105 | Software Engineering     |     3 | INST001       |
+|        106 | Cell Biology             |     4 | INST005       |
+|        107 | English Literature       |     3 | INST006       |
+|        108 | World History            |     4 | INST007       |
+|        109 | Psychological Principles |     3 | INST008       |
+|        110 | Social Issues in Society |     4 | INST009       |
++------------+--------------------------+-------+---------------+
+10 rows in set (0.00 sec)
+
+//-----------------------------------------------------------------create for enrollment--------------------------------------------------
+
+mysql> create table enrollment_records(enroll_id int primary key,
+    -> enroll_status varchar(3),
+    -> grades varchar(3),
+    -> rollno int,
+    -> coursecode int,
+    -> foreign key(rollno) references student_info(rollno),
+    -> foreign key(coursecode) references course_info(coursecode));
+Query OK, 0 rows affected (0.08 sec)
+
+
+mysql> desc enrollment_records;
++---------------+------------+------+-----+---------+-------+
+| Field         | Type       | Null | Key | Default | Extra |
++---------------+------------+------+-----+---------+-------+
+| enroll_id     | int        | NO   | PRI | NULL    |       |
+| enroll_status | varchar(3) | YES  |     | NULL    |       |
+| grades        | varchar(3) | YES  |     | NULL    |       |
+| rollno        | int        | YES  | MUL | NULL    |       |
+| coursecode    | int        | YES  | MUL | NULL    |       |
++---------------+------------+------+-----+---------+-------+
+
+//----------------------------------------------------------insert for enrollment---------------------------------------------------------------
+
+-- Insert sample enrollment records
+INSERT INTO enrollment_records (enroll_id, enroll_status, grades, rollno, coursecode) VALUES
+(1, 'Enr', 'A', 1, 101),
+(2, 'No', 'B', 2, 102),
+(3, 'No', 'A', 3, 103),
+(4, 'Enr', 'B', 4, 104),
+(5, 'No', 'C', 5, 105),
+(6, 'Enr', 'B', 6, 106),
+(7, 'Enr', 'A', 7, 107),
+(8, 'Enr', 'B', 8, 108),
+(9, 'Enr', 'A', 9, 109),
+(10, 'Enr', 'C', 10, 110);
+
+
+//----------------------------------------------------------create for faculty_info---------------------------------------------------------------
+
+mysql> create table faculty_info(Faculty_id int primary key,
+    -> Faculty_name varchar(30) not null,
+    -> academic_department varchar(30),
+    -> email varchar(30) check(email like '%@%'));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc faculty_info;
++---------------------+-------------+------+-----+---------+-------+
+| Field               | Type        | Null | Key | Default | Extra |
++---------------------+-------------+------+-----+---------+-------+
+| Faculty_id          | int         | NO   | PRI | NULL    |       |
+| Faculty_name        | varchar(30) | NO   |     | NULL    |       |
+| academic_department | varchar(30) | YES  |     | NULL    |       |
+| email               | varchar(30) | YES  |     | NULL    |       |
++---------------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+//----------------------------------------------------------insert for faculty_info-------------------------------------------------------
+
+-- Inserting data into the faculty_info table
+INSERT INTO faculty_info (Faculty_id, Faculty_name, academic_department, email) VALUES
+(1, 'Dr. Smith', 'Computer Science', 'drsmith@gmail.com'),
+(2, 'Prof. Patel', 'Mathematics', 'profpatel@gmail.com'),
+(3, 'Dr. Gupta', 'Physics', 'drgupta@gmail.com'),
+(4, 'Prof. Kumar', 'Chemistry', 'kumar@gmail.com'),
+(5, 'Dr. Reddy', 'Engineering', 'drreddy@gmail.com'),
+(6, 'Prof. Chauhan', 'Biology', 'profchauhan@gmail.com'),
+(7, 'Dr. Sharma', 'English', 'drsharma@gmail.com'),
+(8, 'Prof. Singh', 'History', 'profsingh@gmail.com'),
+(9, 'Dr. Mishra', 'Psychology', 'drmishra@gmail.com'),
+(10, 'Prof. Verma', 'Sociology', 'profverma@gmail.com');
+
+
+//---------------------------------------------------------------create for academic_programs-------------------------------------------------
+
+create table academic_programs (
+    program_code varchar(10) primary key,
+    program_name varchar(255) not null,
+    requirements text
+);
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> desc academic_programs;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| program_code | varchar(10)  | NO   | PRI | NULL    |       |
+| program_name | varchar(255) | NO   |     | NULL    |       |
+| requirements | text         | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+
+
+
+//---------------------------------------------------------------insert for academic_programs-------------------------------------------------
+
+
+
+
+insert into academic_programs values 
+  ('CS', 'Computer Science', 'Core courses + Electives'),
+  ('MATH', 'Mathematics', 'Core courses + Advanced Math courses'),
+  ('PHY', 'Physics', 'Core courses + Lab work'),
+  ('CHEM', 'Chemistry', 'Core courses + Organic Chemistry'),
+  ('ENG', 'English', 'Core courses + Literature electives'),
+  ('BIO', 'Biology', 'Core courses + Biology labs'),
+  ('HIST', 'History', 'Core courses + Historical research'),
+  ('ECON', 'Economics', 'Core courses + Micro/Macro Economics'),
+  ('PSYCH', 'Psychology', 'Core courses + Psychology electives'),
+  ('COMM', 'Communication', 'Core courses + Media studies');
+
+
+//---------------------------------------------------------------create for class_schedule-------------------------------------------------
+
+
+
+mysql> CREATE TABLE Class_Schedule (
+    ->     ScheduleID INT PRIMARY KEY,
+    ->     CourseCode int,
+    ->     TimeSlot VARCHAR(20),
+    ->     Day VARCHAR(10),
+    ->     Location VARCHAR(255),
+    ->     FOREIGN KEY (CourseCode) REFERENCES course_info(CourseCode)
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc class_schedule;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| ScheduleID | int          | NO   | PRI | NULL    |       |
+| CourseCode | int          | YES  | MUL | NULL    |       |
+| TimeSlot   | varchar(20)  | YES  |     | NULL    |       |
+| Day        | varchar(10)  | YES  |     | NULL    |       |
+| Location   | varchar(255) | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+//---------------------------------------------------------------insert for class_schedule-------------------------------------------------
+
+
+mysql>insert into Class_Schedule values
+(1, 101, '9:00 AM - 10:30 AM', 'Monday', 'Room A101'),
+(2, 102, '11:00 AM - 12:30 PM', 'Tuesday', 'Room B202'),
+(3, 103, '2:00 PM - 3:30 PM', 'Wednesday', 'Room C303'),
+(4, 104, '4:00 PM - 5:30 PM', 'Thursday', 'Room D404'),
+(5, 105, '8:30 AM - 10:00 AM', 'Friday', 'Room E505'),
+(6, 106, '10:30 AM - 12:00 PM', 'Monday', 'Room F606'),
+(7, 107, '1:00 PM - 2:30 PM', 'Tuesday', 'Room G707'),
+(8, 108, '3:00 PM - 4:30 PM', 'Wednesday', 'Room H808'),
+(9, 109, '5:00 PM - 6:30 PM', 'Thursday', 'Room I909'),
+(10, 110, '9:30 AM - 11:00 AM', 'Friday', 'Room J1010');
+
+
+//---------------------------------------------------------------create for prerequisites-------------------------------------------------
+
+create table prerequisites (prereq_id int primary key,
+program_code varchar(10),
+coursecode int,
+foreign key(program_code) references academic_programs(program_code),
+foreign key(coursecode) references course_info(coursecode));
+
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> desc prerequisites;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| prereq_id    | int         | NO   | PRI | NULL    |       |
+| program_code | varchar(10) | YES  | MUL | NULL    |       |
+| coursecode   | int         | YES  | MUL | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+
+
+//---------------------------------------------------------------insert for prerequisites-------------------------------------------------
+
+insert into prerequisites values
+(11,'CS',101),
+(12,'CS',102),
+(13,'MATH',103),
+(14,'ECON',104);   
+(15,'HIST',105),
+(16,'PHY',106),
+(17, 'ENG', 107),
+(18, 'PHY', 108),
+(19, 'COMM', 109),
+(20, 'PSYCH', 110);
+
+
+
